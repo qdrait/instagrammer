@@ -1,3 +1,9 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :comments
+  get 'favorites/new'
+  get 'favorites/destroy'
+  resources :users
+  resources :posts
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :favorites, only: [:create, :destroy]
 end
