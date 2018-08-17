@@ -40,5 +40,34 @@
   <%= @user.image %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+
+<% @user.favorite_posts.each do |post| %>
+  <div class="col-md-4 mb-4">
+    <div class="panel panel-primary">
+      
+      <div class="panel-heading">
+        <%=post.user.name %>
+      </div>
+
+      <div class="panel-body">
+        <% if post.image.present? %>
+          <div class="text-center">
+          <%= image_tag post.image.url,width: "80%" %>
+          </div>
+        <% end %>
+          <p><%= post.content.truncate(22) %><p>
+          <p><%= link_to '続きを読む',post_path(post.id)%></p>
+      </div>
+
+      <div class="panel-footer">
+        <p>いいね！<%= post.favorites.all.count %>件</p>
+        <p>コメント<%= post.comments.all.count %>件</p>
+        <p><%= post.created_at %></p>
+        <p><%= link_to 'Show', post %>,
+            <%= link_to 'Edit', edit_post_path(post) %>,
+            <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>

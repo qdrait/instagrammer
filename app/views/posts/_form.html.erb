@@ -10,18 +10,39 @@
       </ul>
     </div>
   <% end %>
+  
+  <div class="col-md-8 col-md-offset-2 mb-4">
+    <div class="panel panel-default">
+      
+      <div class="panel-body">
+        <div class="text-center center-block">
+          <% if post.image.present? %>
+            <%= image_tag post.image.url,height: "150px" %>
+          <% end %>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+        <div class="panel-heading"> 画像選択 </div>
+        <div class="field">
+          <p><%= form.file_field :image, id: :post_image %></p>
+        </div>
+      
+        <div class="panel-heading"> 内容入力 </div>
+        <div class="field">
+          <p><%= form.text_area :content,class: "post-content" %></p>
+        </div>
+        
+        <div class="actions">
+          <center>
+          <%= form.submit %>
+           </center>
+        </div>
+
+      </div>
+      
+
+
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.file_field :image, id: :post_image  %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

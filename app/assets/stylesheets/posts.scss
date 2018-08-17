@@ -1,3 +1,28 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.panel {
+    height: 80%;
+}
+
+
+.page-title{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px;
+    
+}
+
+.post-content{
+    width: 100%;
+}
