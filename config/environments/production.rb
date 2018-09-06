@@ -104,4 +104,8 @@ Rails.application.configure do
     authentication: :plain,
     enable_starttls_auto: true
   }
+  
+  config.action_controller.asset_host = 'https://ancient-ocean-52148.herokuapp.com'
+  config.action_mailer.asset_host = config.action_controller.asset_host
+  config.action_mailer.default_url_options = { host: 'https://ancient-ocean-52148.herokuapp.com' }
 end
