@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<div class="card card-container">
+<table class="table">
+  <thead>
+    <tr>
+      <th>お気に入り一覧</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.favorite_posts.each do |post| %>
+      <tr>
+        <td>
+          <%= post.user.name %>さん(<%= post.created_at%>)</br>
+          「<%= post.content.truncate(22) %>」</br>
+        </td>
+        <td>
+          <% if post.image.present? %>
+            <%= image_tag post.image.url,width: "80%" %>
+          <% end %>
+        </td>
+        <td><%= link_to '見る',post_path(post.id)%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>  
+</div>

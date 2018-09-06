@@ -32,6 +32,7 @@
         <% if logged_in? %>
           <li><%= link_to "投稿する", new_post_path %></li>
           <li><%= link_to "個人設定", user_path(current_user.id) %></li>
+          <li><%= link_to "お気に入り", user_favorite_path(current_user.id) %></li>
           <li><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
         <% else %>
           <li><%= link_to "新規登録", new_user_path %></li>
