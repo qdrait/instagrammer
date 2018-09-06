@@ -1,11 +1,23 @@
-<h1>Log in</h1>
-<%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
+<div class="card card-container">
+  <%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
 
-  <%= f.label :email %>
-  <%= f.email_field :email %>
+    <div class="form-category">
+      <h3>ログイン</h3>
+    </div>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
 
-  <%= f.submit "Log in" %>
-<% end %>
+    <div class="form-category">
+      <p>ログインID（メールアドレス）</p>
+      <%= f.email_field :email, class: "form-input" %>
+    </div>
+
+    <div class="form-category">
+      <p>パスワード</p>
+      <%= f.password_field :password, class: "form-input" %>
+    </div>
+
+    <div class="form-category">
+      <%= f.submit "ログイン", class: "btn btn-primary btn-signin"%>
+    </div>
+  <% end %>
+</div>

@@ -1,10 +1,8 @@
-<p id="notice"><%= notice %></p>
-
   <div class="col-md-8 col-md-offset-2 mb-4">
     <div class="panel panel-primary">
       
       <div class="panel-heading">
-        <%=@post.user.name %>
+        <%=@post.user.name %>さんが<%= @post.created_at %>に投稿しました！
       </div>
 
       <div class="panel-body">
@@ -19,15 +17,15 @@
       <div class="panel-footer">
         <p>いいね！<%= @post.favorites.all.count %>件</p>
         <% if @favorite.present? %>
-          <%= link_to("いいねを解除する",favorite_path(id: @favorite.id), method: :delete) %>
+          <%= link_to("いいねを解除する",favorite_path(id: @favorite.id), method: :delete, class: "btn btn-warning") %>
         <% else %>
-          <%= link_to("いいねする",favorites_path(post_id: @post.id), method: :post) %>
+          <%= link_to("いいねする",favorites_path(post_id: @post.id), method: :post, class: "btn btn-success") %>
         <% end %>
-        <p><%= @post.created_at %></p>
-        <p><%= link_to 'Show', @post %>,
-            <%= link_to 'Edit', edit_post_path(@post) %>,
-            <%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </p>
+
+        <% if current_user.id == @post.user_id %>
+          <%= link_to '投稿を編集する', edit_post_path(@post), class: "btn btn-primary"  %>
+          <%= link_to '投稿を削除する', @post, method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>
+        <% end %>
       </div>
       
       <div class="panel-body">
@@ -69,9 +67,16 @@
           <% @comments.each do |comment| %>
             <tr>
               <td><%= comment.user.name %>さんは「<%= comment.content %>」って言ってるよ。(<%= comment.created_at%>)
-              <td><%= link_to 'Show', comment %></td>
-              <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-              <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td>
+                <% if current_user.id == comment.user.id %>
+                <%= link_to '編集', edit_comment_path(comment) %>
+                <% end %>
+              </td>
+              <td>
+                <% if current_user.id == comment.user.id %>
+                <%= link_to '削除', comment, method: :delete, data: { confirm: '本当に削除しますか？' } %>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>

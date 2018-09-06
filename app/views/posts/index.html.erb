@@ -1,12 +1,12 @@
-<p id="notice"><%= notice %></p>
-
-
 <% @posts.each do |post| %>
-  <div class="col-md-4 mb-4">
+  <div class="col-xs-12 col-sm-4 mb-4">
     <div class="panel panel-primary">
       
       <div class="panel-heading">
-        <%=post.user.name %>
+        <% if post.user.image.present? %>
+          <%= image_tag post.user.image.url,height:"20px" %>
+        <% end %>
+        <%=post.user.name %>さんがポスト！
       </div>
 
       <div class="panel-body">

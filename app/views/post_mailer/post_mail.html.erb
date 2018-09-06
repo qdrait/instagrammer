@@ -1,0 +1,11 @@
+<h1>投稿が完了しました！</h1>
+
+<h4>名前：<%= @post.user.name %></h4>
+
+<h4>内容：<%= @post.content %></p>
+
+<% if @post.image.present? %>
+  <div class="text-center">
+  <%= image_tag @post.image.url,height: "300px" %>
+  </div>
+<% end %>
