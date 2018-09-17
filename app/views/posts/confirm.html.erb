@@ -1,0 +1,39 @@
+<h3>以下の内容で、送信する。</h3>
+
+<%= form_with(model: @post, url: posts_path, local: true) do |form| %>
+    <%= form.hidden_field :content %>
+    <%= form.hidden_field :image %>
+    <%= form.hidden_field :image_cache %>
+     <div class="col-md-8 col-md-offset-2 mb-4">
+        <div class="panel panel-default">
+          
+            <div class="panel-body">
+                <div class="text-center center-block">
+                    <% if @post.image.present? %>
+                    <%= image_tag @post.image.url,height: "150px" %>
+                    <% end %>
+                </div>
+            </div>
+          
+            <div class="panel-heading"> 内容入力 </div>
+            <div class="field">
+              <p><%= @post.content %></p>
+            </div>
+            
+            <div class="actions">
+                <center>
+                    <%= form.submit  "登録する"%>
+            </center>
+            </div>
+        </div>
+     </div>
+ <% end %>
+
+<center>
+    <%= form_with(model: @post, url: new_post_path, local: true, method: 'get') do |form| %>
+        <%= form.hidden_field :content %>
+        <%= form.hidden_field :image %>
+        <%= form.hidden_field :image_cache %>
+        <%= form.submit "もどるときはここを押してね！",name: 'back' %>
+<% end %>
+</center>

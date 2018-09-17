@@ -1,4 +1,4 @@
-<%= form_with(model: post, local: true) do |form| %>
+<%= form_with(model: post, local: true, url: choose_new_or_edit) do |form| %>
   <% if post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -22,7 +22,7 @@
         </div>
       </div>
 
-        <div class="panel-heading"> 画像選択 </div>
+        <div class="panel-heading"> 画像選択（画像未登録時のみ） </div>
         <div class="field">
           <p><%= form.file_field :image, id: :post_image %></p>
         </div>
@@ -31,7 +31,7 @@
         <div class="field">
           <p><%= form.text_area :content,class: "post-content" %></p>
         </div>
-        
+        <%= form.hidden_field :image_cache %>
         <div class="actions">
           <center>
           <%= form.submit %>

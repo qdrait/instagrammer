@@ -20,7 +20,11 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+    if params[:back]
+      @post = Post.new(post_params)
+    else
+      @post = Post.new
+    end
   end
 
   # GET /posts/1/edit
@@ -67,6 +71,10 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url, success: '投稿を削除しました' }
       format.json { head :no_content }
     end
+  end
+
+  def confirm
+    @post = Post.new(post_params)
   end
 
   private
