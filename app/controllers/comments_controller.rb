@@ -29,10 +29,17 @@ class CommentsController < ApplicationController
     # @comment.post_id = params[:post_id]
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to controller: 'posts', action: 'show', id: @comment.post_id, success: 'コメントを登録しました' }
+        format.html { redirect_to post_path(@comment.post_id), success: 'コメントを登録しましたしました' }
         format.json { render :show, status: :created, location: @comment }
       else
-        format.html { render :new }
+        @post = Post.find(@comment.post_id)
+        @favorite = current_user.favorites.find_by(post_id: @post.id)
+        @favorites = @post.favorites.all
+        # @comment = Comment.new
+        @comments = @post.comments.all
+        flash.now[:danger] = 'コメントは1文字以上入力して下さい。'
+        format.html { render 'posts/show' }
+        # format.html { redirect_to post_path(@comment.post_id), danger: 'コメントを１文字以上入力してください' }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -45,10 +52,10 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to @comment, success: 'コメントを更新しました' }
+        format.html { redirect_to post_path(@comment.post_id), success: 'コメントを更新しました' }
         format.json { render :show, status: :ok, location: @comment }
       else
-        format.html { render :edit }
+        format.html { redirect_to post_path(@comment.post_id), success: 'コメントの更新に失敗しました' }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -59,19 +66,20 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, success: 'コメントを削除しました。' }
+      format.html { redirect_to post_path(@comment.post_id), success: 'コメントを削除しました' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def comment_params
-      params.require(:comment).permit(:content, :post_id, :user_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def comment_params
+    params.require(:comment).permit(:content, :post_id, :user_id)
+  end
 end

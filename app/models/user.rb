@@ -4,10 +4,6 @@ class User < ApplicationRecord
     validates :name,presence: true,length: { maximum: 255 }
     validates :email,presence: true,length: { maximum: 255 },
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },uniqueness: true
-    validates :tel_no,length: { maximum: 20 }
-    validates :gender,length: { maximum: 1 }
-    validates :website,length: { maximum: 1000 }
-    validates :profile,length: { maximum: 255 }
     
     before_validation { email.downcase! }
     

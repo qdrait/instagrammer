@@ -70,17 +70,17 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.require(:post).permit(:content, :image, :image_cache, :user_id)
-    end
-    
-    def authenticate
-       redirect_to new_session_path if !logged_in?
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params
+    params.require(:post).permit(:content, :image, :image_cache, :user_id)
+  end
+  
+  def authenticate
+     redirect_to new_session_path if !logged_in?
+  end
 end

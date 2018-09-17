@@ -11,22 +11,20 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
-  </div>
-
-  <div class="field">
-    <%= form.label :post_id %>
-    <%= form.text_field :post_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="col-md-8 col-md-offset-2 mb-4">
+    <div class="panel panel-default">
+      
+      <div class="panel-body">
+        <div class="panel-heading"> コメント内容入力 </div>
+        <div class="field">
+          <p><%= form.text_area :content,class: "post-content" %></p>
+        </div>
+        <div class="actions">
+          <center>
+          <%= form.submit %>
+           </center>
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>
